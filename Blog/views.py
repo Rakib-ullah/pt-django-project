@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Post
 
 blogdata = [
     {
@@ -31,7 +32,8 @@ blogdata = [
 
 
 def homepage(request):
-    return render(request, "home.html", {"blogdata": blogdata})
+    posts =Post.objects.all()
+    return render(request, "home.html", {"posts": posts})
 
 
 def about(request):
