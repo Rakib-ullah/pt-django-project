@@ -3,17 +3,15 @@
 
 {% for post in posts %}
 
-
 <article class="media content-section">
-    <div class="media-body">
-        <div class="article-metadata">
-            <h1><p class="article-content">{{ post.author }}</p></h1>
-            <small class="article-title" href="#">{{ post.post_datetime|date:"F d,Y"}}</small>
-            <a class="mr-2" href="#">{{ post.title }}</a>
-            <h6><a class="text-muted">{{ post.content }}</a></h6>
-        </div>
-
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ post.author }}</a>
+      <small class="text-muted">{{ post.post_datetime }}</small>
     </div>
+    <h4><a class="article-title" href="#">{{ post.title }}</a></h4>
+    <p class="article-content">{{ post.content }}</p>
+  </div>
 </article>
 {%endfor%}
 
