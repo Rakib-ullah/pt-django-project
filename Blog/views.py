@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Post
+from django.views.generic import ListView, DetailView, CreateView
 
 blogdata = [
     {
@@ -32,10 +33,31 @@ blogdata = [
 
 
 def homepage(request):
-    posts =Post.objects.all()
+    posts = Post.objects.all()
     return render(request, "home.html", {"posts": posts})
+
+
+class PostListview(ListView):
+    model = Post
+    template_name = 'home.html'
+    context_object_name = 'posts'
+    ordering = ['-post_datetime']
 
 
 def about(request):
     return render(request, "about.html", {"title": "about page"})
 
+
+class PostDetailsView(DetailView):
+    model = Post
+    template_name = 'post_details.html'
+
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['title', 'content']
+    template_name = 'post_forms.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
